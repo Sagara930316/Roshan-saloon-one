@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosan Saloon - Style & Elegance Redefined</title>
+    <meta name="description" content="Experience luxury hair and beauty services at Rosan Saloon. Modern techniques, expert stylists, and a relaxing atmosphere.">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Lato', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'primary': '#AD8B73', // Example: Warm Beige
+                        'secondary': '#FFF8EA', // Example: Light Cream
+                        'accent': '#EABF9F', // Example: Soft Peach
+                        'dark': '#3C2A21', // Example: Deep Brown
+                    },
+                    animation: {
+                       'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                       fadeInUp: {
+                           '0%': { opacity: 0, transform: 'translateY(20px)' },
+                           '100%': { opacity: 1, transform: 'translateY(0)' },
+                       }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.163.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.163.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+</head>
+<body class="bg-secondary text-dark font-sans antialiased overflow-x-hidden">
+
+    <div id="three-canvas-container" class="fixed top-0 left-0 w-full h-full -z-10 opacity-50"></div>
+
+    <header class="fixed top-0 left-0 w-full bg-secondary/80 backdrop-blur-md shadow-sm z-50 transition-all duration-300" id="main-header">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif font-bold text-primary hover:text-dark transition-colors">Rosan Saloon</a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#gallery" class="hover:text-primary transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                <a href="#book" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-dark transition-colors text-sm font-semibold">Book Now</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-dark focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary/95 backdrop-blur-md absolute top-full left-0 w-full shadow-lg">
+            <nav class="flex flex-col items-center space-y-4 py-6">
+                <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#gallery" class="hover:text-primary transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+                <a href="#book" class="bg-primary text-secondary px-6 py-2 rounded-full hover:bg-dark transition-colors font-semibold">Book Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-20 md:pt-24"> <section id="hero" class="relative min-h-[80vh] flex items-center overflow-hidden">
+             <div id="p5-canvas-container" class="absolute top-0 left-0 w-full h-full -z-5 opacity-70"></div>
+
+            <div class="container mx-auto px-6 text-center z-10">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-dark mb-4 animate-this">
+                    Where Style <span class="text-primary">Meets</span> Soul
+                </h1>
+                <p class="text-lg md:text-xl text-dark/80 mb-8 max-w-2xl mx-auto animate-this" style="animation-delay: 0.2s;">
+                    Discover a haven of beauty and relaxation. Rosan Saloon offers premium hair, skin, and beauty treatments tailored just for you.
+                </p>
+                <a href="#book" class="bg-primary text-secondary px-8 py-3 rounded-full hover:bg-dark transition-colors font-semibold text-lg animate-this" style="animation-delay: 0.4s;">
+                    Book Your Experience
+                </a>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+                <svg class="w-6 h-6 text-primary animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </section>
+
+        <section id="about-snippet" class="py-20 lg:py-32 bg-white reveal-section">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif text-dark mb-4">Welcome to Rosan</h2>
+                    <p class="text-dark/80 mb-4 leading-relaxed">
+                        At Rosan Saloon, we believe beauty is an experience, not just a service. Founded on passion and expertise, our salon provides a luxurious escape where you can rejuvenate and transform.
+                    </p>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        Our team of dedicated stylists and therapists are committed to using the finest products and latest techniques to help you look and feel your absolute best.
+                    </p>
+                    <a href="#about" class="text-primary font-semibold hover:underline">Learn More About Us &rarr;</a>
+                </div>
+                <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500">
+                    <span class="text-xl">Image Placeholder (e.g., Salon Interior)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 lg:py-32 bg-secondary reveal-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-serif text-center text-dark mb-12">Our Signature Services</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                        <div class="bg-accent/30 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                           <span class="text-primary text-2xl font-bold">H</span>
+                        </div>
+                        <h3 class="text-xl font-serif text-dark mb-2">Hair Styling & Cuts</h3>
+                        <p class="text-dark/70 mb-4 flex-grow">From classic cuts to modern trends, precision styling tailored to your look.</p>
+                        <a href="#service-detail-hair" class="text-primary font-semibold hover:underline mt-auto">View Details</a>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                        <div class="bg-accent/30 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-primary text-2xl font-bold">C</span>
+                        </div>
+                        <h3 class="text-xl font-serif text-dark mb-2">Color Treatments</h3>
+                        <p class="text-dark/70 mb-4 flex-grow">Balayage, highlights, full color - vibrant results using premium products.</p>
+                        <a href="#service-detail-color" class="text-primary font-semibold hover:underline mt-auto">View Details</a>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                         <div class="bg-accent/30 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                           <span class="text-primary text-2xl font-bold">S</span>
+                        </div>
+                        <h3 class="text-xl font-serif text-dark mb-2">Skincare & Facials</h3>
+                        <p class="text-dark/70 mb-4 flex-grow">Rejuvenating facials and skin treatments for a radiant glow.</p>
+                        <a href="#service-detail-skin" class="text-primary font-semibold hover:underline mt-auto">View Details</a>
+                    </div>
+                     </div>
+                <div class="text-center mt-12">
+                     <a href="#all-services" class="bg-primary text-secondary px-8 py-3 rounded-full hover:bg-dark transition-colors font-semibold">
+                        Explore All Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+         <section id="gallery" class="py-20 lg:py-32 bg-white reveal-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-serif text-center text-dark mb-12">Our Work & Atmosphere</h2>
+                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 1</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 2</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 3</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 4</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500 col-span-2"><span>Gallery Image 5 (Wide)</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 6</span></div>
+                    <div class="bg-gray-200 aspect-square rounded-lg flex items-center justify-center text-gray-500"><span>Gallery Image 7</span></div>
+                </div>
+                 <p class="text-center mt-8 text-dark/70">More stunning transformations and glimpses of our salon coming soon!</p>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20 lg:py-32 bg-secondary reveal-section">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-serif text-center text-dark mb-12">What Our Clients Say</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-dark/70 italic mb-4">"Absolutely love my hair! The stylists are true artists, and the atmosphere is so relaxing. Highly recommend Rosan Saloon."</p>
+                        <p class="font-semibold text-dark">- Sarah K.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-dark/70 italic mb-4">"My facial was divine. My skin feels amazing, and the service was impeccable from start to finish."</p>
+                        <p class="font-semibold text-dark">- Emily R.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <p class="text-dark/70 italic mb-4">"Found my new favorite salon! Professional, friendly, and they really listen to what you want. Worth every penny."</p>
+                        <p class="font-semibold text-dark">- Michael B.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="book" class="py-20 lg:py-32 bg-primary text-secondary text-center reveal-section">
+            <div class="container mx-auto px-6">
+                 <h2 class="text-3xl md:text-4xl font-serif mb-6">Ready for Your Transformation?</h2>
+                 <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto text-secondary/90">
+                     Book your appointment today and step into a world of style and relaxation.
+                 </p>
+                 <a href="#booking-page" class="bg-secondary text-primary px-10 py-4 rounded-full hover:bg-white transition-colors font-semibold text-lg">
+                     Book Now
+                 </a>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 lg:py-32 bg-white reveal-section">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif text-dark mb-6">Get In Touch</h2>
+                    <p class="text-dark/80 mb-8 leading-relaxed">
+                        We'd love to hear from you! Whether you have questions or want to book an appointment, feel free to reach out.
+                    </p>
+                    <div class="space-y-4">
+                        <p><strong>Address:</strong> 123 Beauty Lane, Style City, SC 45678</p>
+                        <p><strong>Phone:</strong> <a href="tel:+1234567890" class="hover:text-primary">(123) 456-7890</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:hello@rosansaloon.com" class="hover:text-primary">hello@rosansaloon.com</a></p>
+                        <p><strong>Hours:</strong> Tue - Sat: 9 AM - 6 PM, Sun/Mon: Closed</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-200 aspect-video rounded-lg flex items-center justify-center text-gray-500">
+                        <span class="text-xl">Map Placeholder</span>
+                         </div>
+                     </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-dark text-secondary/70 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-serif text-xl mb-4 text-secondary">Rosan Saloon</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-primary transition-colors">Facebook</a>
+                <a href="#" class="hover:text-primary transition-colors">Instagram</a>
+                <a href="#" class="hover:text-primary transition-colors">Pinterest</a>
+            </div>
+            <p class="text-sm">&copy; <span id="current-year"></span> Rosan Saloon. All Rights Reserved.</p>
+            <p class="text-sm mt-1">Website designed with ♡</p> </div>
+    </footer>
+
+    <script type="module" src="js/three-scene.js"></script>
+    <script src="js/p5-sketch.js"></script>
+    <script src="js/script.js"></script>
+
+</body>
+</html>
